@@ -21,6 +21,9 @@ let num1 = ""
 let num2 = ""
 let operator
 let result
+let decimalUsedforNum1 = false ;
+let decimalUsedforNum2 = false;
+
 
 function operate(){
 
@@ -83,6 +86,7 @@ operators.forEach((button) => {
       display.textContent = result + button.textContent;
       num1 = result;
       num2 = "";
+      decimalUsedforNum2 = false;
     }
 
     else {  // if num1 or num2 is not present then only display num1 and text content of operator
@@ -113,25 +117,28 @@ equal.addEventListener ("click", ()=>{
   display.textContent = result;
   num1 = result;
   num2 = "";
+  decimalUsedforNum2 = false;
 }
 })
-/*
+
 const decimal = document.querySelector("#decimal");
 decimal.addEventListener("click", () => {
   
-  if (!operator == true){ // Check if operator is not truthy or null or undefined(not pressed). Assign values to num1. 
+  if (!operator == true ){ // Check if operator is not truthy or null or undefined(not pressed). Assign values to num1. 
     
-    num1 = num1+decimal.textContent;
-    display.textContent = num1;
+    if (decimalUsedforNum1 == false) {
+      decimalUsedforNum1 = true;
+      num1 = num1+decimal.textContent;
+      display.textContent = num1;}
   }  
-  else {   
-      //Operator is pressed. So numbers entered are stored in num2
+  else {   //Operator is pressed. So numbers entered are stored in num2
+    if (decimalUsedforNum2 == false){
+      decimalUsedforNum2 = true;
     num2 = num2+decimal.textContent;
-    display.textContent = num1 + operator + num2;
+    display.textContent = num1 + operator + num2;}
   }
-  
 });
-*/
+
 const clear = document.querySelector("#clear");
 clear.addEventListener("click", () => {
   num1 = "";
@@ -139,6 +146,8 @@ clear.addEventListener("click", () => {
   operator = "";
   display.textContent = "";
   result = "";
+  decimalUsedforNum1 = false;
+  decimalUsedforNum2 = false;
 });
 
 const back = document.querySelector("#back");
